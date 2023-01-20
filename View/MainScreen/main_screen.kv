@@ -1,0 +1,33 @@
+<MainScreenView>
+
+    MDBoxLayout:
+        spacing: 5
+        padding: 5
+
+        orientation: "vertical"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        # height: self.minimum_height
+
+        MDRaisedButton:
+            size_hint_y: None
+            size_hint_x: 1
+            canvas.before:
+                Color:
+                    rgba: (1,0,0,1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            pos_hint_x: "center"
+            text: "Strom"
+            on_release:
+                root.on_strom_pressed()
+
+        MDRaisedButton:
+            size_hint_x: 1
+            size_hint_y: None
+            text: "Wasser"
+
+        MDRaisedButton:
+            size_hint_y: None
+            size_hint_x: 1
+            text: "Waerme"

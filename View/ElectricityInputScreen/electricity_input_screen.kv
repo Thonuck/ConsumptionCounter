@@ -1,0 +1,40 @@
+<ElectricityInputScreenView>
+    stand_data: stand_data
+    date_data: date_data
+    time_data: time_data
+    AnchorLayout:
+        
+        anchor_y: "center"
+        BoxLayout:
+            spacing: 5
+            padding: 20
+            # heigth: 20
+            # size_hint_y: None
+            orientation: "vertical"
+                
+            MDTextField:
+                id: stand_data
+                hint_text: "Zaehlerstand"
+            MDTextField:
+                id: date_data
+                hint_text: "Datum"
+            MDTextField:
+                id: time_data
+                hint_text: "Uhrzeit"
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: 5
+                padding: 5
+    
+                MDRaisedButton:
+                    size_hint: (1, None)
+                    text: "Abbruch"
+                    on_release:
+                        root.on_cancel_pressed()
+
+                MDRaisedButton:
+                    size_hint: (1, None)
+                    text: "Eingeben"
+                    on_release:
+                        root.on_enter_data_pressed()
