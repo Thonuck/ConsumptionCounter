@@ -29,3 +29,16 @@ class ElectricityInputScreenModel(BaseScreenModel):
         data[old_index] = new_data
         database.db_write_strom(data)
         self.notify_observers('electricity overview screen')
+
+    def get_last_stand(self):
+        data = database.db_read_strom()
+        if data:
+            try:
+                return data[-1]['stand']
+            except KeyError:
+                return ''
+            except IndexError:
+                return ''
+
+        return ''
+        
