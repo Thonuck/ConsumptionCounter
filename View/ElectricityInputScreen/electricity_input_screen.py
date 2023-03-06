@@ -64,7 +64,7 @@ class ElectricityInputScreenView(BaseScreenView):
                 return
 
             last_value = self.model.get_last_stand()
-            if float(last_value) >= stand_value:
+            if last_value and float(last_value) >= stand_value:
                 self.show_alert_dialog(message="Der Stand sollte größer als der Letzte ({})sein!".format(last_value))
                 return
                      
