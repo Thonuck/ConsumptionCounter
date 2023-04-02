@@ -1,3 +1,5 @@
+from kivymd.uix.toolbar import MDTopAppBar
+
 from View.base_screen import BaseScreenView
 from kivy.lang import Builder
 from kivy.properties import StringProperty
@@ -30,6 +32,9 @@ class ElectricityOverviewScreenView(BaseScreenView):
                              spacing=5,
                              padding=5)
 
+        top_bar = MDTopAppBar(title="Electicity Overview",
+                              right_action_items=[["dots-vertical", lambda x: self.on_settings_pressed()]])
+
         self.table = MDDataTable(
             pos_hint = {'center_x': 0.5, 'center_y': 0.5},
             size_hint = (0.9, 0.9),
@@ -54,15 +59,18 @@ class ElectricityOverviewScreenView(BaseScreenView):
 
         insert_btn = MDRaisedButton(text="Eingabe",
                                     size_hint=(1, None),
+                                    font_size='24sp',
                                     on_release=self.on_entry_button)
 
         back_btn = MDRaisedButton(text="Zurueck",
-                                    size_hint=(1, None),
-                                    on_release=self.on_back_button)
+                                  size_hint=(1, None),
+                                  font_size='24sp',
+                                  on_release=self.on_back_button)
 
         btn_frame.add_widget(back_btn)
         btn_frame.add_widget(insert_btn)
 
+        layout.add_widget(top_bar)
         layout.add_widget(self.table)
         layout.add_widget(btn_frame)
 
@@ -98,10 +106,12 @@ class ElectricityOverviewScreenView(BaseScreenView):
                 buttons=[
                     MDRaisedButton(
                         text="Loeschen",
+                        font_size="24sp",
                         on_release=lambda _: self.on_dialog_delete_row(instance_row)
                     ),
                     MDRaisedButton(
                         text="Editieren",
+                        font_size="24sp",
                         on_release=lambda _: self.on_dialog_edit_row(instance_row)
                     ),
                 ],
@@ -131,3 +141,5 @@ class ElectricityOverviewScreenView(BaseScreenView):
         self.controller.delete_row_data(row_data)
 
 
+    def on_settings_pressed(self):
+        self

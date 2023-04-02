@@ -11,3 +11,5 @@ class FinancesScreenView(BaseScreenView):
     def on_cancel_pressed(self):
         self.manager_screens.current = "main screen"
 
+    def on_settings_pressed(self):
+        pass

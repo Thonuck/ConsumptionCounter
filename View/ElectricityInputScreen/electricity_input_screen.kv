@@ -10,39 +10,45 @@
     stand_data: stand_data
     date_data: date_data
     time_data: time_data
-    AnchorLayout:
-        
-        anchor_y: "center"
-        BoxLayout:
-            spacing: 5
-            padding: 20
-            # heigth: 20
-            # size_hint_y: None
-            orientation: "vertical"
-                
-            CustomMDTextField:
-                id: stand_data
-                hint_text: "Zaehlerstand"
-            CustomMDTextField:
-                id: date_data
-                hint_text: "Datum"
-            CustomMDTextField:
-                id: time_data
-                hint_text: "Uhrzeit"
 
-            MDBoxLayout:
-                orientation: "horizontal"
+    BoxLayout:
+        orientation: 'vertical'
+        MDTopAppBar:
+            title: "Stromzähler Eingabe"
+
+        AnchorLayout:
+
+            anchor_y: "center"
+            BoxLayout:
                 spacing: 5
-                padding: 5
-    
-                MDRaisedButton:
-                    size_hint: (1, None)
-                    text: "Abbruch"
-                    on_release:
-                        root.on_cancel_pressed()
+                padding: 20
+                # heigth: 20
+                # size_hint_y: None
+                orientation: "vertical"
 
-                MDRaisedButton:
-                    size_hint: (1, None)
-                    text: "Eingeben"
-                    on_release:
-                        root.on_enter_data_pressed()
+                CustomMDTextField:
+                    id: stand_data
+                    hint_text: "Zaehlerstand"
+                CustomMDTextField:
+                    id: date_data
+                    hint_text: "Datum"
+                CustomMDTextField:
+                    id: time_data
+                    hint_text: "Uhrzeit"
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    spacing: 5
+                    padding: 5
+
+                    CustomMDRaisedButton:
+                        size_hint: (1, None)
+                        text: "Abbruch"
+                        on_release:
+                            root.on_cancel_pressed()
+
+                    CustomMDRaisedButton:
+                        size_hint: (1, None)
+                        text: "Eingeben"
+                        on_release:
+                            root.on_enter_data_pressed()

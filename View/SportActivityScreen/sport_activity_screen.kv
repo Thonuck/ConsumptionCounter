@@ -2,6 +2,9 @@
     BoxLayout:
         orientation: 'vertical'
 
+        MDTopAppBar:
+            title: "Sport Aktivitäten"
+            right_action_items: [["dots-vertical", lambda x: root.on_settings_pressed()]]
 
         MDBoxLayout:
             orientation: "horizontal"
