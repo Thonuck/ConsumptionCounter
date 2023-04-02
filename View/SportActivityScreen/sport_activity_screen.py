@@ -8,3 +8,5 @@ class SportActivityScreenView(BaseScreenView):
         The view in this method tracks these changes and updates the UI
         according to these changes.
         """
+    def on_cancel_pressed(self):
+        self.manager_screens.current = "main screen"
