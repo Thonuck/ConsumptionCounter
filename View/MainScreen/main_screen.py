@@ -10,4 +10,10 @@ class MainScreenView(BaseScreenView):
         """
     
     def on_strom_pressed(self):
-        self.manager_screens.current = "electricity overview screen" 
+        self.manager_screens.current = "electricity overview screen"
+
+    def on_sport_pressed(self):
+        self.manager_screens.current = "sport activity screen"
+
+    def on_finances_pressed(self):
+        self.manager_screens.current = "finance overview screen"

@@ -9,6 +9,7 @@ class ElectricityOverviewScreenModel(BaseScreenModel):
     Implements the logic of the
     :class:`~View.electricity_overview_screen.ElectricityOverviewScreen.ElectricityOverviewScreenView` class.
     """
+
     def get_strom_data(self):
         return database.db_read_strom()
 

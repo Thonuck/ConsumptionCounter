@@ -1,3 +1,11 @@
+#:set MY_FONT_SIZE '24sp'
+
+<CustomMDTextField@MDTextField>:
+    font_size: MY_FONT_SIZE
+
+<CustomMDRaisedButton@MDRaisedButton>:
+    font_size: MY_FONT_SIZE
+
 <ElectricityInputScreenView>
     stand_data: stand_data
     date_data: date_data
@@ -12,13 +20,13 @@
             # size_hint_y: None
             orientation: "vertical"
                 
-            MDTextField:
+            CustomMDTextField:
                 id: stand_data
                 hint_text: "Zaehlerstand"
-            MDTextField:
+            CustomMDTextField:
                 id: date_data
                 hint_text: "Datum"
-            MDTextField:
+            CustomMDTextField:
                 id: time_data
                 hint_text: "Uhrzeit"
 

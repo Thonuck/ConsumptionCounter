@@ -1,3 +1,8 @@
+#:set MY_FONT_SIZE '30sp'
+
+<CustomMDRaisedButton@MDRaisedButton>:
+    font_size: MY_FONT_SIZE
+
 <MainScreenView>
 
     MDBoxLayout:
@@ -8,8 +13,8 @@
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         # height: self.minimum_height
 
-        MDRaisedButton:
-            size_hint_y: None
+        CustomMDRaisedButton:
+            size_hint_y: 0.2
             size_hint_x: 1
             canvas.before:
                 Color:
@@ -22,12 +27,26 @@
             on_release:
                 root.on_strom_pressed()
 
-        MDRaisedButton:
+        CustomMDRaisedButton:
             size_hint_x: 1
-            size_hint_y: None
+            size_hint_y: 0.2
             text: "Wasser"
 
-        MDRaisedButton:
-            size_hint_y: None
+        CustomMDRaisedButton:
+            size_hint_y: 0.2
             size_hint_x: 1
             text: "Waerme"
+
+        CustomMDRaisedButton:
+            size_hint_y: 0.2
+            size_hint_x: 1
+            text: "Sport"
+            on_release:
+                root.on_sport_pressed()
+
+        CustomMDRaisedButton:
+            size_hint_y: 0.2
+            size_hint_x: 1
+            text: "Finanzen"
+            on_release:
+                root.on_finances_pressed()
