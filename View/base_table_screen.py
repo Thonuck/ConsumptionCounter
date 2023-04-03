@@ -2,16 +2,19 @@ from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.datatables import MDDataTable
+from kivymd.uix.dialog import MDDialog
 from kivymd.uix.toolbar import MDTopAppBar
 
+from View.base_app_screen import BaseAppScreenView
 from View.base_screen import BaseScreenView
 import logging
 
 logger = logging.getLogger()
 
 
-class BaseTableScreen(BaseScreenView):
+class BaseTableScreen(BaseAppScreenView):
     new_item_screen = ''
+    dialog = None
 
     def model_is_changed(self) -> None:
         """
@@ -21,8 +24,6 @@ class BaseTableScreen(BaseScreenView):
         """
         self.controller.update_table_from_database()
 
-    def log_info(self, log_line):
-        logger.info('{}:{}'.format(self.__class__.__name__, log_line))
 
     def create_top_bar(self, title):
         """Creates the window top bar
@@ -95,6 +96,51 @@ class BaseTableScreen(BaseScreenView):
         """Called by table """
         pass
 
-    def on_select_row(self):
+    def on_select_row(self, instance_table, instance_row):
         """Called by table """
-        pass
+        self.log_info("SELECT ROW: {} - {}".format(instance_table, instance_row))
+        self.show_item_dialog(instance_row)
+
+    def show_item_dialog(self, instance_row):
+        if not self.dialog:
+            self.dialog = MDDialog(
+                text="Was willst Du machen?",
+                buttons=[
+                    MDRaisedButton(
+                        text="Loeschen",
+                        font_size="24sp",
+                        on_release=lambda _: self.on_dialog_delete_row(instance_row)
+                    ),
+                    MDRaisedButton(
+                        text="Editieren",
+                        font_size="24sp",
+                        on_release=lambda _: self.on_dialog_edit_row(instance_row)
+                    ),
+                ],
+            )
+        self.dialog.open()
+
+    def on_dialog_edit_row(self, instance_row):
+        self.dialog.dismiss()
+        self.dialog = None
+        row_data = self.get_instance_row_data(instance_row)
+        # self.log_info("Editing Row {}".format(row_data))
+
+        # input_screen = self.manager_screens.get_screen("electricity input screen")
+        # input_screen.date_data.text = row_data[0]
+        # input_screen.time_data.text = row_data[1]
+        # input_screen.stand_data.text = row_data[2]
+        # self.log_info("setting to edit")
+        # input_screen.status = 'edit'
+        # self.manager_screens.current = "electricity input screen"
+
+    def on_dialog_delete_row(self, instance_row):
+        self.dialog.dismiss()
+        self.dialog = None
+        row_data = self.get_instance_row_data(instance_row)
+        self.log_info("Deleting Row {}".format(row_data))
+        self.controller.delete_row_data(row_data)
+
+    def get_instance_row_data(self, instance_row):
+        start, end = instance_row.table.recycle_data[instance_row.index]['range']
+        return [x['text'] for x in instance_row.table.recycle_data[int(start):int(end) + 1]]

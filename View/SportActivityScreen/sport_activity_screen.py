@@ -5,11 +5,6 @@ so the user sees the latest done activity on top.
 """
 from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.button import MDRaisedButton
-from kivymd.uix.datatables import MDDataTable
-from kivymd.uix.toolbar import MDTopAppBar
-
-from View.base_screen import BaseScreenView
 from View.base_table_screen import BaseTableScreen
 
 
@@ -18,6 +13,7 @@ class SportActivityScreenView(BaseTableScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.new_item_screen = 'sport activity input screen'
         column_data = [("Datum", dp(20)),
                        ("Aktivität", dp(18))]
 

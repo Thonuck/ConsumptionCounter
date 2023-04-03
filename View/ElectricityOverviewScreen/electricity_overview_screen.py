@@ -86,7 +86,7 @@ class ElectricityOverviewScreenView(BaseScreenView):
     def on_back_button(self, widget=None):
         self.manager_screens.current = "main screen"
 
-    def on_press_checkbox(self, instanace_table, current_row):
+    def on_press_checkbox(self, instance_table, current_row):
         self.log_info("SELECT ROW: {} - {}".format(instance_table, current_row))
 
     def on_select_row(self, instance_table, instance_row):

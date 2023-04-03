@@ -1,8 +1,8 @@
-
+from Controller.base_table_controller import BaseTableController
 from View.SportActivityScreen.sport_activity_screen import SportActivityScreenView
 
 
-class SportActivityScreenController:
+class SportActivityScreenController(BaseTableController):
     """
     The `SportActivityScreenController` class represents a controller implementation.
     Coordinates work of the view with the model.
@@ -16,3 +16,5 @@ class SportActivityScreenController:
 
     def get_view(self) -> SportActivityScreenView:
         return self.view
+
+
