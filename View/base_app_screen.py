@@ -32,7 +32,7 @@ class BaseAppScreenView(BaseScreenView):
                               font_size='24sp',
                               on_release=self.on_back_button_pressed)
 
-    def create_button_frame(self, back=True, insert=True):
+    def create_button_frame(self, back=True, insert=True, add=False):
         """Creates the button frame on the lower edge of the screen.
         Two buttons are filled: go back to main screen and one button to
         insert new data."""
@@ -50,9 +50,21 @@ class BaseAppScreenView(BaseScreenView):
                 logger.warning("No new_item_screen defined!")
             else:
                 btn_frame.add_widget(self.create_insert_button())
-
+        if add:
+            btn_frame.add_widget(self.create_add_button())
         return btn_frame
 
     def on_back_button_pressed(self, widget=None):
         """Function to return to the main screen"""
+        if not hasattr(self, 'back_screen') and not self.back_screen:
+            self.log_warning('on_back_button_pressed: No back_screen defined!')
         self.manager_screens.current = self.back_screen
+
+    def create_add_button(self, widget=None):
+        return MDRaisedButton(text="Hinzufuegen",
+                              size_hint=(1, None),
+                              font_size='24sp',
+                              on_release=self.on_add_button_pressed)
+
+    def on_add_button_pressed(self, widget=None):
+        self.log_warning('on_enter_data_pressed: not implemented yet!')
