@@ -3,11 +3,9 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.toolbar import MDTopAppBar
-
 from View.base_app_screen import BaseAppScreenView
-from View.base_screen import BaseScreenView
 import logging
+
 
 logger = logging.getLogger()
 
@@ -23,14 +21,6 @@ class BaseTableScreen(BaseAppScreenView):
         according to these changes.
         """
         self.controller.update_table_from_database()
-
-
-    def create_top_bar(self, title):
-        """Creates the window top bar
-        :param title: The string to display as title"""
-        return MDTopAppBar(
-            title=title,
-            right_action_items=[['dots-vertical', lambda x: self.on_settings_pressed()]])
 
     def on_settings_pressed(self):
         """Called function, if the dots in the title bar are pressed"""
@@ -52,20 +42,6 @@ class BaseTableScreen(BaseAppScreenView):
         table.bind(on_row_press=self.on_select_row)
         return table
 
-    def create_button_frame(self):
-        """Creates the button frame on the lower edge of the screen.
-        Two buttons are filled: go back to main screen and one button to
-        insert new data."""
-        btn_frame = MDBoxLayout(orientation="horizontal",
-                                spacing=5,
-                                padding=5,
-                                size_hint=(0.9, 0.1),
-                                pos_hint={'center_x': 0.5, 'center_y': 0.5},
-                                )
-
-        btn_frame.add_widget(self.create_back_button())
-        btn_frame.add_widget(self.create_insert_button())
-        return btn_frame
 
     def create_insert_button(self):
         """Create the insert button - to insert new data to the table"""
@@ -81,16 +57,7 @@ class BaseTableScreen(BaseAppScreenView):
         entry_screen.status = 'new'
         self.manager_screens.current = self.new_item_screen
 
-    def create_back_button(self):
-        """Creates the back button to return to the main screen"""
-        return MDRaisedButton(text="Zurueck",
-                              size_hint=(1, None),
-                              font_size='24sp',
-                              on_release=self.on_back_button_pressed)
 
-    def on_back_button_pressed(self, widget=None):
-        """Function to return to the main screen"""
-        self.manager_screens.current = "main screen"
 
     def on_press_checkbox(self):
         """Called by table """
