@@ -39,4 +39,5 @@ class ElectricityOverviewScreenController:
 
     def delete_row_data(self, row_data):
         logger.warning("Not yet implemented!!")
-        self.model.delete_row(row_data)
+        item = {'datum': row_data[0], 'zeit': row_data[1], 'stand': row_data[2]}
+        self.model.delete_item(item)

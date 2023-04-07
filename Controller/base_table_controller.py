@@ -15,7 +15,7 @@ class BaseTableController():
 
     def delete_row_data(self, row_data):
         self.log_info('Deleting row with data {}'.format(row_data))
-        # self.model.delete_row(row_data)
+        self.model.delete_row(row_data)
 
     def on_enter_data(self):
         self.log_info('Enter Data ')

@@ -3,6 +3,7 @@ from kivy.properties import StringProperty
 from kivy.uix.anchorlayout import AnchorLayout
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.textfield import MDTextField
+from kivymd.toast import toast
 
 from View.base_app_screen import BaseAppScreenView
 
@@ -50,20 +51,32 @@ class SportActivityInputScreenView(BaseAppScreenView):
 
         return anchor_layout
 
+    def get_data(self):
+        return {'datum': self.datum_text_field.text, 'activity': self.activity_text_field.text}
+
     def model_is_changed(self) -> None:
         """
-        Called whenever any change has occurred in the data model.
+        Called whenever any change has occurrdated in the data model.
         The view in this method tracks these changes and updates the UI
         according to these changes.
         """
 
     def on_add_button_pressed(self, widget=None):
+
+        could_be_added = True
+        data = self.get_data()
+        all_filled = all([x for x in data.values()])
+        if not all_filled:
+            toast("Not able to add data")
+            return
+
         if self.status == 'new':
             self.controller.on_enter_data()
         else:
             self.controller.on_update_data()
 
         self.manager_screens.current = 'sport activity screen'
+
     def on_pre_enter(self, *args):
         """Event called by screenmanager
         fill elements depending on reason"""

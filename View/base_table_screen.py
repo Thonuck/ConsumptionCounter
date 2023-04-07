@@ -48,7 +48,6 @@ class BaseTableScreen(BaseAppScreenView):
         self.table.bind(on_row_press=self.on_select_row)
         return self.table
 
-
     def create_insert_button(self):
         """Create the insert button - to insert new data to the table"""
         return MDRaisedButton(text="Eingabe",

@@ -16,14 +16,13 @@ class ElectricityOverviewScreenModel(BaseScreenModel):
     def log(self, log_string):
         logger.info('ElectricityOverviewScreenModel: {}'.format(log_string))
 
-    def delete_row(self, item_data):
+    def delete_item(self, item_data):
         strom_data = database.db_read_strom()
         self.log('current data: {}'.format(strom_data))
         self.log('delete row {}'.format(item_data))
-        item = {'datum': item_data[0], 'zeit': item_data[1], 'stand': item_data[2]}
-        if item in strom_data:
+        if item_data in strom_data:
             self.log('deleting item!')
-            strom_data.remove(item)
+            strom_data.remove(item_data)
         else:
             self.log('item not found!')
         
