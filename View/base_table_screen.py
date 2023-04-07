@@ -36,6 +36,7 @@ class BaseTableScreen(BaseAppScreenView):
         """Creates the data table
         :param column_data: The column names given as tupes with width
         :param row_data: The data to insert into the table initially"""
+        #self.columns = [x[0] for x in column_data]
         self.table = MDDataTable(
             pos_hint={'center_x': 0.5, 'center_y': 0.5},
             size_hint=(0.9, 0.9),
@@ -111,8 +112,10 @@ class BaseTableScreen(BaseAppScreenView):
         self.dialog.dismiss()
         self.dialog = None
         row_data = self.get_instance_row_data(instance_row)
+
+        data_item = dict(zip(self.columns, row_data))
         self.log_info("Deleting Row {}".format(row_data))
-        self.controller.delete_row_data(row_data)
+        self.controller.delete_item(data_item)
 
     def get_instance_row_data(self, instance_row):
         start, end = instance_row.table.recycle_data[instance_row.index]['range']

@@ -29,4 +29,5 @@ class SportActivityScreenView(BaseTableScreen):
                                                  row_data=row_data))
         layout.add_widget(self.create_button_frame())
 
+        self.columns = ['datum', 'activity']
         self.add_widget(layout)

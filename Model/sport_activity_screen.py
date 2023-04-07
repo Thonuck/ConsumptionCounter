@@ -22,3 +22,11 @@ class SportActivityScreenModel(BaseScreenModel):
     def get_sport_activity_data(self):
         return database.db_read_sport_activities()
 
+    def delete_item(self, item_data):
+        sport_data = database.db_read_sport_activities()
+        if item_data in sport_data:
+            sport_data.remove(item_data)
+
+        database.db_write_sport_activity(sport_data)
+        self.notify_observers('sport activity screen')
+
