@@ -1,0 +1,27 @@
+@startuml
+
+class SportActivityScreen
+class BaseScreen {
+controller
+model
+}
+
+abstract BaseAppScreen {
+    back_screen
+    on_add_button_pressed()
+    create_button_frame()
+    on_back_button_pressed()
+    create_add_button()
+    create_top_bar()
+    log_warning()
+    log_info()
+}
+
+class Controller:SportActivityScreen {
+}
+
+SportActivityScreen --> BaseAppScreen
+BaseAppScreen --> BaseScreen
+
+@enduml
+

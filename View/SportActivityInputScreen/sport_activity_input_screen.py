@@ -1,4 +1,5 @@
 from kivy.metrics import dp
+from kivy.properties import StringProperty
 from kivy.uix.anchorlayout import AnchorLayout
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.textfield import MDTextField
@@ -8,6 +9,8 @@ from View.base_app_screen import BaseAppScreenView
 
 class SportActivityInputScreenView(BaseAppScreenView):
     back_screen = 'sport activity screen'
+    status = 'new'
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -33,15 +36,15 @@ class SportActivityInputScreenView(BaseAppScreenView):
                                   size_hint_y=0.5,
                                   orientation='vertical')
 
-        datum_text_field = MDTextField(id='sport_activity_datum',
+        self.datum_text_field = MDTextField(id='sport_activity_datum',
                                        hint_text='Datum',
                                        font_size='24sp')
-        item_layout.add_widget(datum_text_field)
+        item_layout.add_widget(self.datum_text_field)
 
-        activity_text_field = MDTextField(id='sport_activity_type',
+        self.activity_text_field = MDTextField(id='sport_activity_type',
                                        hint_text='Activity',
                                        font_size='24sp')
-        item_layout.add_widget(activity_text_field)
+        item_layout.add_widget(self.activity_text_field)
 
         anchor_layout.add_widget(item_layout)
 
@@ -55,4 +58,20 @@ class SportActivityInputScreenView(BaseAppScreenView):
         """
 
     def on_add_button_pressed(self, widget=None):
-        self.log_warning("Ok, let's continue here...")
+        if self.status == 'new':
+            self.controller.on_enter_data()
+        else:
+            self.controller.on_update_data()
+
+        self.manager_screens.current = 'sport activity screen'
+    def on_pre_enter(self, *args):
+        """Event called by screenmanager
+        fill elements depending on reason"""
+
+        self.log_info('On pre enter status {}'.format(self.status))
+
+        if self.status == 'edit':
+            self.controller.on_pre_update_data()
+        else:
+            # self.date_data.text = self.controller.get_date()
+            pass

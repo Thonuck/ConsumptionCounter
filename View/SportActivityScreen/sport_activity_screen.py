@@ -11,15 +11,14 @@ from View.base_table_screen import BaseTableScreen
 class SportActivityScreenView(BaseTableScreen):
 
     def __init__(self, **kwargs):
+        self.back_screen = 'main screen'
         super().__init__(**kwargs)
 
         self.new_item_screen = 'sport activity input screen'
         column_data = [("Datum", dp(20)),
                        ("Aktivität", dp(18))]
 
-        row_data = [("15.12.2022", "Taekwondo"),
-                    ("13.12.2022", "Laufen"),
-                    ("10.12.2022", "Gymnastik")]
+        row_data = []
 
         layout = MDBoxLayout(orientation="vertical",
                              spacing=5,

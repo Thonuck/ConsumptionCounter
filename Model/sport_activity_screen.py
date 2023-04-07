@@ -1,3 +1,4 @@
+from Model import database
 from Model.base_model import BaseScreenModel
 
 class SportActivityScreenModel(BaseScreenModel):
@@ -17,4 +18,7 @@ class SportActivityScreenModel(BaseScreenModel):
         # :class:`~View.SportActivityScreen.sport_activity_screen.SportActivityScreenView` about the
         # changes that have occurred in the data model.
         self.notify_observers("sport activity screen")
+
+    def get_sport_activity_data(self):
+        return database.db_read_sport_activities()
 

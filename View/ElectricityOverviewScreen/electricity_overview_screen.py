@@ -123,7 +123,9 @@ class ElectricityOverviewScreenView(BaseScreenView):
         self.dialog = None
         row_data = self.get_instance_row_data(instance_row)
         self.log_info("Editing Row {}".format(row_data))
+        self.open_edit_screen(row_data)
 
+    def open_edit_screen(self, row_data):
         input_screen = self.manager_screens.get_screen("electricity input screen")
         input_screen.date_data.text = row_data[0]
         input_screen.time_data.text = row_data[1]
@@ -131,7 +133,6 @@ class ElectricityOverviewScreenView(BaseScreenView):
         self.log_info("setting to edit")
         input_screen.status = 'edit'
         self.manager_screens.current = "electricity input screen"
-        
 
     def on_dialog_delete_row(self, instance_row):
         self.dialog.dismiss()

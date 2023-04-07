@@ -23,7 +23,8 @@ class ElectricityOverviewScreenController:
 
     def update_table_from_database(self):
         strom_data = self.model.get_strom_data()
-        
+
+        print(strom_data)
         item_list = []
         for entry in strom_data:
             item_data = (entry['datum'], entry['zeit'], entry['stand'])

@@ -1,3 +1,5 @@
+from abc import abstractmethod
+
 from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDRaisedButton
@@ -13,6 +15,10 @@ logger = logging.getLogger()
 class BaseTableScreen(BaseAppScreenView):
     new_item_screen = ''
     dialog = None
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.table = None
 
     def model_is_changed(self) -> None:
         """
@@ -30,7 +36,7 @@ class BaseTableScreen(BaseAppScreenView):
         """Creates the data table
         :param column_data: The column names given as tupes with width
         :param row_data: The data to insert into the table initially"""
-        table = MDDataTable(
+        self.table = MDDataTable(
             pos_hint={'center_x': 0.5, 'center_y': 0.5},
             size_hint=(0.9, 0.9),
             check=False,  # draw checkbox for each row
@@ -38,9 +44,9 @@ class BaseTableScreen(BaseAppScreenView):
             row_data=row_data
         )
 
-        table.bind(on_check_press=self.on_press_checkbox)
-        table.bind(on_row_press=self.on_select_row)
-        return table
+        self.table.bind(on_check_press=self.on_press_checkbox)
+        self.table.bind(on_row_press=self.on_select_row)
+        return self.table
 
 
     def create_insert_button(self):
@@ -56,8 +62,6 @@ class BaseTableScreen(BaseAppScreenView):
         entry_screen = self.manager_screens.get_screen(self.new_item_screen)
         entry_screen.status = 'new'
         self.manager_screens.current = self.new_item_screen
-
-
 
     def on_press_checkbox(self):
         """Called by table """
@@ -91,8 +95,11 @@ class BaseTableScreen(BaseAppScreenView):
         self.dialog.dismiss()
         self.dialog = None
         row_data = self.get_instance_row_data(instance_row)
-        # self.log_info("Editing Row {}".format(row_data))
+        self.open_edit_screen(row_data)
 
+    @abstractmethod
+    def open_edit_screen(self, row_data):
+        pass
         # input_screen = self.manager_screens.get_screen("electricity input screen")
         # input_screen.date_data.text = row_data[0]
         # input_screen.time_data.text = row_data[1]

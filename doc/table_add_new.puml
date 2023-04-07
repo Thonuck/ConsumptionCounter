@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant "ElectricityInputScreen\nView" as eis_view
+participant "ElectricityInputScreen\nController" as eis_control
+participant "ElectricityInputScreen\nModel" as eis_model
+participant "ElectricityOverviewScreen\nView" as eov_view
+participant "ElectricityOverviewScreen\nController" as eov_control
+participant "ElectricityOverviewScreen\nModel" as eov_model
+participant "Database" as app_database
+
+eis_view -> eis_model: get_last_stand()
+eis_view -> eis_control: on_enter_data()
+eis_control -> eis_control: data = get_current_data()
+eis_control -> eis_model: add(data)
+eis_model -> app_database: db_read_strom()
+eis_model -> eis_model: update_strom()
+eis_model -> app_database: db_write_strom()
+eis_model -> eis_model: notify_observers('electricity overview screen')
+eis_model -> eov_view: model_is_changed()
+eov_view -> eov_control: update_table_from_database()
+eov_control -> eov_model: get_strom_data()
+eov_control -> eov_view: table.row_data = table_row_data
+eov_control -> eov_view: table.table_data.refresh_from_data()
+eis_view -> eis_view: screen_manager = electricity overview screen
+
+
+
+@enduml
