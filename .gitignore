@@ -1,2 +1,5 @@
 __pycache__
 Session.vim
+/venv/
+/linux_venv/
+.buildozer
