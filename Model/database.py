@@ -1,55 +1,60 @@
 import json
 import os
 
-def get_db_filename():
-    """
-    Construct 
-    """
-    this_file = os.path.realpath(__file__)
-    base_dir = os.path.dirname(this_file)
-    return os.path.join(base_dir, 'counter_data.json')
 
-def db_read():
-    if os.path.exists(get_db_filename()):
-        try:
-            with open(get_db_filename(), "r") as json_read:
-                data = json.load(json_read)
-        except:
-            os.remove(get_db_filename())
-            data = {}
-    else:
-        data = {}
-    return data
+class DataBase():
+    
+    def __init__(self, user_data_dir):
+        self.user_data_dir = user_data_dir
 
+        self.db_path = os.path.join(self.user_data_dir, 'consumption_counter')
 
-def db_write(data):
-    if data is None:
-        return
+        if not os.path.exists(self.db_path):
+            os.mkdir(self.db_path)
         
-    with open(get_db_filename(), "w") as json_write:
-        json.dump(data, json_write)
-
-def db_read_strom():
-    data = db_read()
-    if 'strom' in data:
-        return data['strom']
-
-    return []
-
-def db_write_strom(current_strom_data):
-    data = db_read()
-    data['strom'] = current_strom_data
-    db_write(data)
+        self.db_filename = os.path.join(self.db_path, 'counter_data.json')
 
 
-def db_read_sport_activities():
-    data = db_read()
-    if 'sport_activity' in data:
-        return data['sport_activity']
+    def read(self):
+        if os.path.exists(self.db_filename):
+            try:
+                with open(self.db_filename, "r") as json_read:
+                    data = json.load(json_read)
+            except:
+                os.remove(self.db_filename)
+                data = {}
+        else:
+            data = {}
+        return data
 
-    return []
 
-def db_write_sport_activity(current_sport_activity):
-    data = db_read()
-    data['sport_activity'] = current_sport_activity
-    db_write(data)
+    def write(self, data):
+        if data is None:
+            return
+            
+        with open(self.db_filename, "w") as json_write:
+            json.dump(data, json_write)
+    
+    def read_strom(self):
+        data = self.read()
+        if 'strom' in data:
+            return data['strom']
+
+        return []
+
+    def write_strom(self, current_strom_data):
+        data = self.read()
+        data['strom'] = current_strom_data
+        self.write(data)
+
+    def read_sport_activities(self):
+        data = self.read()
+        if 'sport_activity' in data:
+            return data['sport_activity']
+
+        return []
+
+    def write_sport_activity(self, current_sport_activity):
+        data = self.read()
+        data['sport_activity'] = current_sport_activity
+        self.write(data)

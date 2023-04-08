@@ -6,11 +6,15 @@
 # method). For this, observers must be descendants of an abstract class,
 # inheriting which, the `model_is_changed` method must be overridden.
 
+from Model.database import DataBase
 
 class BaseScreenModel:
     """Implements a base class for model modules."""
 
     _observers = []
+
+    def __init__(self, user_data_dir):
+        self.data_base = DataBase(user_data_dir)
 
     def add_observer(self, observer) -> None:
         self._observers.append(observer)

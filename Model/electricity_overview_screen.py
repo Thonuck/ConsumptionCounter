@@ -1,5 +1,4 @@
 from Model.base_model import BaseScreenModel
-from Model import database
 import logging
 
 logger = logging.getLogger()
@@ -11,13 +10,13 @@ class ElectricityOverviewScreenModel(BaseScreenModel):
     """
 
     def get_strom_data(self):
-        return database.db_read_strom()
+        return self.data_base.read_strom()
 
     def log(self, log_string):
         logger.info('ElectricityOverviewScreenModel: {}'.format(log_string))
 
     def delete_item(self, item_data):
-        strom_data = database.db_read_strom()
+        strom_data = self.data_base.read_strom()
         self.log('current data: {}'.format(strom_data))
         self.log('delete row {}'.format(item_data))
         if item_data in strom_data:
@@ -26,7 +25,7 @@ class ElectricityOverviewScreenModel(BaseScreenModel):
         else:
             self.log('item not found!')
         
-        database.db_write_strom(strom_data)
+        self.data_base.write_strom(strom_data)
             
         self.notify_observers('electricity overview screen')
         

@@ -38,9 +38,11 @@ class ConsumptionCounter(MDApp):
         see how new screens are added according to the given application
         architecture.
         """
+        
 
         for i, name_screen in enumerate(screens.keys()):
-            model = screens[name_screen]["model"]()
+            print(name_screen)
+            model = screens[name_screen]["model"](self.user_data_dir)
             controller = screens[name_screen]["controller"](model)
             view = controller.get_view()
             view.manager_screens = self.manager_screens

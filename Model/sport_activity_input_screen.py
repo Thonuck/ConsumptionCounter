@@ -1,4 +1,3 @@
-from Model import database
 from Model.base_model import BaseScreenModel
 
 
@@ -21,7 +20,7 @@ class SportActivityInputScreenModel(BaseScreenModel):
         self.notify_observers("sport activity input screen")
 
     def add(self, new_data):
-        data = database.db_read_sport_activities()
+        data = self.data_base.read_sport_activities()
         data.append(new_data)
-        database.db_write_sport_activity(data)
+        self.data_base.write_sport_activity(data)
         self.notify_observers('sport activity screen')
