@@ -16,9 +16,30 @@ class BaseTableScreen(BaseAppScreenView):
     new_item_screen = ''
     dialog = None
 
-    def __init__(self, **kw):
-        super().__init__(**kw)
+    def __init__(self,
+                 title,
+                 back_screen,
+                 new_item_screen,
+                 column_data,
+                 columns,
+                 row_data=[],
+                 **kwargs):
+        super().__init__(**kwargs)
+
         self.table = None
+        self.back_screen = back_screen
+        self.new_item_screen = new_item_screen
+
+        layout = MDBoxLayout(orientation="vertical",
+                             spacing=5,
+                             padding=5)
+
+        layout.add_widget(self.create_top_bar(title=title))
+        layout.add_widget(self.create_data_table(column_data=column_data,
+                                                 row_data=row_data))
+        layout.add_widget(self.create_button_frame())
+
+        self.add_widget(layout)
 
     def model_is_changed(self) -> None:
         """

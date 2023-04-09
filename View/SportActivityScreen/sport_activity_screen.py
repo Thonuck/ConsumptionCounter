@@ -9,25 +9,16 @@ from View.base_table_screen import BaseTableScreen
 
 
 class SportActivityScreenView(BaseTableScreen):
-
+    
     def __init__(self, **kwargs):
-        self.back_screen = 'main screen'
-        super().__init__(**kwargs)
-
-        self.new_item_screen = 'sport activity input screen'
         column_data = [("Datum", dp(20)),
-                       ("Aktivität", dp(18))]
+                       ("Aktivität", dp(40))]
 
-        row_data = []
+        super().__init__(title='Sport Activity Overview',
+                         new_item_screen='sport activity input screen',
+                         back_screen='main screen',
+                         column_data=column_data,
+                         row_data=[],
+                         columns=['datum', 'activity'],
+                         **kwargs)    
 
-        layout = MDBoxLayout(orientation="vertical",
-                             spacing=5,
-                             padding=5)
-
-        layout.add_widget(self.create_top_bar(title="Sport Activity Overview"))
-        layout.add_widget(self.create_data_table(column_data=column_data,
-                                                 row_data=row_data))
-        layout.add_widget(self.create_button_frame())
-
-        self.columns = ['datum', 'activity']
-        self.add_widget(layout)

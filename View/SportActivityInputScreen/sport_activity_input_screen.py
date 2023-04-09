@@ -86,5 +86,5 @@ class SportActivityInputScreenView(BaseAppScreenView):
         if self.status == 'edit':
             self.controller.on_pre_update_data()
         else:
-            # self.date_data.text = self.controller.get_date()
+            self.datum_text_field.text = self.controller.get_date()
             pass
