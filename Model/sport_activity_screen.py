@@ -6,15 +6,6 @@ class SportActivityScreenModel(BaseScreenModel):
     :class:`~View.SportActivityScreen.sport_activity_screen.SportActivityScreenView` class.
     """
 
-    @property
-    def data(self):
-        return self._data
-
-    @data.setter
-    def data(self, value):
-        self._data = value
-        self.notify_observers("sport activity screen")
-
     def get(self):
         with self.data_base.sport_activities() as sport_activities:
             return sport_activities

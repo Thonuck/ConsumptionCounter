@@ -71,3 +71,21 @@ class DataBase():
         data = self.read_sport_activities()
         yield data
         self.write_sport_activity(data)
+
+    def read_water(self):
+        data = self.read()
+        if 'water_data' in data:
+            return data['water_data']
+
+        return []
+
+    def write_water(self, current_sport_activity):
+        data = self.read()
+        data['water_data'] = current_sport_activity
+        self.write(data)
+
+    @contextmanager
+    def water(self):
+        data = self.read_water()
+        yield data
+        self.write_water(data)
