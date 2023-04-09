@@ -29,6 +29,7 @@ class BaseTableScreen(BaseAppScreenView):
         self.table = None
         self.back_screen = back_screen
         self.new_item_screen = new_item_screen
+        self.columns = columns
 
         layout = MDBoxLayout(orientation="vertical",
                              spacing=5,

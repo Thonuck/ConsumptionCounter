@@ -19,7 +19,7 @@ class SportActivityScreenController(BaseTableController):
         return self.view
 
     def update_table_from_database(self):
-        sport_activity_data = self.model.get_sport_activity_data()
+        sport_activity_data = self.model.get()
 
         item_list = []
         for entry in sport_activity_data:

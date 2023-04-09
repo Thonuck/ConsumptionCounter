@@ -13,19 +13,17 @@ class SportActivityScreenModel(BaseScreenModel):
     @data.setter
     def data(self, value):
         self._data = value
-        # We notify the View -
-        # :class:`~View.SportActivityScreen.sport_activity_screen.SportActivityScreenView` about the
-        # changes that have occurred in the data model.
         self.notify_observers("sport activity screen")
 
-    def get_sport_activity_data(self):
-        return self.data_base.read_sport_activities()
+    def get(self):
+        with self.data_base.sport_activities() as sport_activities:
+            return sport_activities
 
     def delete_item(self, item_data):
-        sport_data = self.data_base.read_sport_activities()
-        if item_data in sport_data:
-            sport_data.remove(item_data)
 
-        self.data_base.write_sport_activity(sport_data)
+        with self.data_base.sport_activities() as sport_activities:
+            if item_data in sport_activities:
+                sport_activities.remove(item_data)
+
         self.notify_observers('sport activity screen')
 

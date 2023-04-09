@@ -1,5 +1,6 @@
 import json
 import os
+from contextlib import contextmanager
 
 
 class DataBase():
@@ -47,6 +48,12 @@ class DataBase():
         data['strom'] = current_strom_data
         self.write(data)
 
+    @contextmanager
+    def strom(self):
+        data = self.read_strom()
+        yield data
+        self.write_strom(data)
+
     def read_sport_activities(self):
         data = self.read()
         if 'sport_activity' in data:
@@ -58,3 +65,9 @@ class DataBase():
         data = self.read()
         data['sport_activity'] = current_sport_activity
         self.write(data)
+
+    @contextmanager
+    def sport_activities(self):
+        data = self.read_sport_activities()
+        yield data
+        self.write_sport_activity(data)
