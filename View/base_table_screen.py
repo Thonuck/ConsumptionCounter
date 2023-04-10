@@ -1,5 +1,6 @@
 from abc import abstractmethod
 
+from kivy.core.window import Window
 from kivy.metrics import dp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDRaisedButton
@@ -31,16 +32,23 @@ class BaseTableScreen(BaseAppScreenView):
         self.new_item_screen = new_item_screen
         self.columns = columns
 
-        layout = MDBoxLayout(orientation="vertical",
-                             spacing=5,
-                             padding=5)
+        self.layout = MDBoxLayout(orientation="vertical",
+                                  spacing=5,
+                                  padding=5)
 
-        layout.add_widget(self.create_top_bar(title=title))
-        layout.add_widget(self.create_data_table(column_data=column_data,
+        self.layout.add_widget(self.create_top_bar(title=title))
+        self.layout.add_widget(self.create_data_table(column_data=column_data,
                                                  row_data=row_data))
-        layout.add_widget(self.create_button_frame())
+        self.layout.add_widget(self.create_button_frame())
 
-        self.add_widget(layout)
+        Window.bind(on_resize=lambda *args: self.update_rows_num())
+
+        self.add_widget(self.layout)
+
+    def update_rows_num(self):
+        print("update rows num")
+        print("layout size:: {}".format(self.size))
+        
 
     def model_is_changed(self) -> None:
         """
@@ -64,7 +72,9 @@ class BaseTableScreen(BaseAppScreenView):
             size_hint=(0.9, 0.9),
             check=False,  # draw checkbox for each row
             column_data=column_data,
-            row_data=row_data
+            row_data=row_data,
+            use_pagination=True,
+            rows_num=7,
         )
 
         self.table.bind(on_check_press=self.on_press_checkbox)
@@ -122,13 +132,6 @@ class BaseTableScreen(BaseAppScreenView):
     @abstractmethod
     def open_edit_screen(self, row_data):
         pass
-        # input_screen = self.manager_screens.get_screen("electricity input screen")
-        # input_screen.date_data.text = row_data[0]
-        # input_screen.time_data.text = row_data[1]
-        # input_screen.stand_data.text = row_data[2]
-        # self.log_info("setting to edit")
-        # input_screen.status = 'edit'
-        # self.manager_screens.current = "electricity input screen"
 
     def on_dialog_delete_row(self, instance_row):
         self.dialog.dismiss()

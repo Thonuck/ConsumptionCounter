@@ -26,6 +26,9 @@ class ConsumptionCounter(MDApp):
         self.manager_screens = MDScreenManager()
         
     def build(self) -> MDScreenManager:
+        self.theme_cls.theme_style = "Dark"
+        # self.theme_cls.primary_palette = "Blue"  # "Purple", "Red"
+
         self.generate_application_screens()
         return self.manager_screens
 
