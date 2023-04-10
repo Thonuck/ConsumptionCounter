@@ -24,7 +24,5 @@ class ElectricityInputScreenController(BaseTableController):
         return self.view
     
     def get_current_data(self):
-        return {'stand': self.view.stand_data.text,
-                'datum': self.view.date_data.text,
-                'zeit': self.view.time_data.text}
+        return self.view.get_data()
 

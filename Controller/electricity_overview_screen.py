@@ -1,11 +1,11 @@
-
+from Controller.base_table_controller import BaseTableController
 from View.ElectricityOverviewScreen.electricity_overview_screen import ElectricityOverviewScreenView
 import logging
 
 logger = logging.getLogger()
 
 
-class ElectricityOverviewScreenController:
+class ElectricityOverviewScreenController(BaseTableController):
     """
     The `ElectricityOverviewScreenController` class represents a controller implementation.
     Coordinates work of the view with the model.
@@ -22,22 +22,13 @@ class ElectricityOverviewScreenController:
         return self.view
 
     def update_table_from_database(self):
-        strom_data = self.model.get_strom_data()
+        electricity_data = self.model.get()
+        self.log_info("Electricity Data: {}".format(electricity_data))
 
-        print(strom_data)
         item_list = []
-        for entry in strom_data:
-            item_data = (entry['datum'], entry['zeit'], entry['stand'])
+        for entry in electricity_data:
+            item_data = (entry['datum'], entry['time'], entry['stand'])
             item_list.append(item_data)
 
         self.view.table.row_data = item_list
         self.view.table.table_data.refresh_from_data()
-
-    def edit_row_data(self, row_data):
-        logger.warning("Not yet implemented!!")
-        self.view.manager_screens.current = "electricity input screen"
-
-    def delete_row_data(self, row_data):
-        logger.warning("Not yet implemented!!")
-        item = {'datum': row_data[0], 'zeit': row_data[1], 'stand': row_data[2]}
-        self.model.delete_item(item)

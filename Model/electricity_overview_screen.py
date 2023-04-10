@@ -9,23 +9,14 @@ class ElectricityOverviewScreenModel(BaseScreenModel):
     :class:`~View.electricity_overview_screen.ElectricityOverviewScreen.ElectricityOverviewScreenView` class.
     """
 
-    def get_strom_data(self):
-        return self.data_base.read_strom()
-
-    def log(self, log_string):
-        logger.info('ElectricityOverviewScreenModel: {}'.format(log_string))
+    def get(self):
+        with self.data_base.strom() as strom:
+            return strom
 
     def delete_item(self, item_data):
-        strom_data = self.data_base.read_strom()
-        self.log('current data: {}'.format(strom_data))
-        self.log('delete row {}'.format(item_data))
-        if item_data in strom_data:
-            self.log('deleting item!')
-            strom_data.remove(item_data)
-        else:
-            self.log('item not found!')
-        
-        self.data_base.write_strom(strom_data)
+        with self.data_base.strom() as strom:
+            if item_data in strom:
+                strom.remove(item_data)
             
         self.notify_observers('electricity overview screen')
         
