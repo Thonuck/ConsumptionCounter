@@ -17,9 +17,9 @@ class SportActivityInputScreenView(BaseInputScreen):
                          overview_screen = 'sport activity screen',
                          **kwargs)
 
-
-
     def get_data(self):
         return {'datum': self.elements['datum']['widget'].text,
                 'activity': self.elements['activity']['widget'].text}
 
+    def pre_fill_elements(self):
+        self.elements['datum']['widget'].text = self.controller.get_date()

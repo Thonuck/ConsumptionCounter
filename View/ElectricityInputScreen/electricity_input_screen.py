@@ -34,7 +34,7 @@ class ElectricityInputScreenView(BaseScreenView):
         if self.status == 'edit':
             self.controller.on_pre_update_data()
         else:
-            self.stand_data.text = self.model.get_last_stand()
+            self.stand_data.text = self.controller.get_last('stand')
             self.date_data.text = self.controller.get_date()
             self.time_data.text = self.controller.get_time()
     

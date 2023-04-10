@@ -19,14 +19,4 @@ class WaterInputScreenController(BaseTableController):
         return self.view
 
     def get_current_data(self):
-        return {'datum': self.view.datum_text_field.text,
-                'time': self.view.time_text_field.text,
-                'stand': self.view.stand_text_field.text}
-
-    def add(self, new_data):
-        pass
-        # self.log_info("Add new data {}".format(new_data))
-        # data = database.db_read_sport_activities()
-        # data.append(new_data)
-        # database.db_write_sport_activity(data)
-        # self.notify_observers('sport activity screen')
+        return self.view.get_data()

@@ -40,3 +40,8 @@ class BaseTableController():
 
     def get_time(self):
         return datetime.datetime.now().strftime("%H:%M")
+
+    def get_last(self, element):
+        last_element = self.model.get_last_element()
+        if last_element:
+            return last_element[element]

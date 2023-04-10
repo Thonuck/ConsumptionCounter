@@ -72,8 +72,6 @@ class BaseInputScreen(BaseAppScreenView):
 
         self.manager_screens.current = self.back_screen 
 
-    def pre_fill_elements(self):
-        self.elements['datum']['widget'].text = self.controller.get_date()
 
     def on_pre_enter(self, *args):
         """Event called by screenmanager
