@@ -21,8 +21,7 @@ class SportActivityInputScreenController(BaseTableController):
         return self.view
 
     def get_current_data(self):
-        return {'datum': self.view.datum_text_field.text,
-                'activity': self.view.activity_text_field.text}
+        return self.view.get_data()
 
     def add(self, new_data):
         pass

@@ -36,23 +36,23 @@ class SportActivityInputScreenView(BaseAppScreenView):
                                   size_hint_x=0.9,
                                   size_hint_y=0.5,
                                   orientation='vertical')
+        
+        self.elements = {'datum': {'id': 'sport_activity_datum', 'text': 'Datum'},
+                         'activity': {'id': 'sport_activity_type', 'text': 'Activity'}}
 
-        self.datum_text_field = MDTextField(id='sport_activity_datum',
-                                       hint_text='Datum',
-                                       font_size='24sp')
-        item_layout.add_widget(self.datum_text_field)
-
-        self.activity_text_field = MDTextField(id='sport_activity_type',
-                                       hint_text='Activity',
-                                       font_size='24sp')
-        item_layout.add_widget(self.activity_text_field)
-
+        for element_name in self.elements:
+            self.elements[element_name]['widget'] = MDTextField(hint_text=self.elements[element_name]['text'],
+                                                                # id=self.elements[element_name]['id'],
+                                                                font_size='24sp')
+            item_layout.add_widget(self.elements[element_name]['widget'])
+           
         anchor_layout.add_widget(item_layout)
 
         return anchor_layout
 
     def get_data(self):
-        return {'datum': self.datum_text_field.text, 'activity': self.activity_text_field.text}
+        return {'datum': self.elements['datum']['widget'].text,
+                'activity': self.elements['activity']['widget'].text}
 
     def model_is_changed(self) -> None:
         """
@@ -86,5 +86,5 @@ class SportActivityInputScreenView(BaseAppScreenView):
         if self.status == 'edit':
             self.controller.on_pre_update_data()
         else:
-            self.datum_text_field.text = self.controller.get_date()
+            self.elements['datum']['widget'].text = self.controller.get_date()
             pass
