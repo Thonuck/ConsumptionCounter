@@ -29,7 +29,7 @@ class BaseInputScreen(BaseAppScreenView):
 
 
     def add_input_widgets(self):
-        anchor_layout = AnchorLayout(anchor_y='center')
+        anchor_layout = AnchorLayout(anchor_y='top')
 
         item_layout = MDBoxLayout(spacing= 5,
                                   padding=20,

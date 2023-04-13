@@ -12,6 +12,10 @@
         orientation: "vertical"
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         # height: self.minimum_height
+        MDTopAppBar:
+            title: "Verbrauchs Tracker"
+            specific_text_color: app.theme_cls.accent_color
+            right_action_items: [["dots-vertical", lambda x: root.on_settings_pressed()]]
 
         CustomMainScreenMDRaisedButton:
             size_hint_y: 0.2
@@ -38,6 +42,8 @@
             size_hint_y: 0.2
             size_hint_x: 1
             text: "Waerme"
+            on_release:
+                root.on_warmth_pressed()
 
         CustomMainScreenMDRaisedButton:
             size_hint_y: 0.2

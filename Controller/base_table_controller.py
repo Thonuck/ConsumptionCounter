@@ -43,5 +43,8 @@ class BaseTableController():
 
     def get_last(self, element):
         last_element = self.model.get_last_element()
+        
         if last_element:
             return last_element[element]
+        else:
+            return '0'

@@ -18,5 +18,11 @@ class MainScreenView(BaseScreenView):
     def on_water_pressed(self):
         self.manager_screens.current = "water overview screen"
 
+    def on_warmth_pressed(self):
+        self.manager_screens.current = "warmth overview screen"
+
     def on_finances_pressed(self):
         self.manager_screens.current = "finance overview screen"
+
+    def on_settings_pressed(self):
+        self.manager_screens.current = "settings screen"

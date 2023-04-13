@@ -89,3 +89,21 @@ class DataBase():
         data = self.read_water()
         yield data
         self.write_water(data)
+
+    def read_warmth(self):
+        data = self.read()
+        if 'warmth_data' in data:
+            return data['warmth_data']
+
+        return []
+
+    def write_warmth(self, current_sport_activity):
+        data = self.read()
+        data['warmth_data'] = current_sport_activity
+        self.write(data)
+
+    @contextmanager
+    def warmth(self):
+        data = self.read_warmth()
+        yield data
+        self.write_warmth(data)

@@ -17,6 +17,8 @@ from Model.water_overview_screen import WaterOverviewScreenModel
 from Controller.water_overview_screen import WaterOverviewScreenController
 from Model.water_input_screen import WaterInputScreenModel
 from Controller.water_input_screen import WaterInputScreenController
+from Model.settings_screen import SettingsScreenModel
+from Controller.settings_screen import SettingsScreenController
 
 screens = {
     "main screen": {
@@ -55,5 +57,9 @@ screens = {
     "water overview screen": {
         "model": WaterOverviewScreenModel,
         "controller": WaterOverviewScreenController,
+    },
+    "settings screen": {
+        "model": SettingsScreenModel,
+        "controller": SettingsScreenController,
     }
 }
