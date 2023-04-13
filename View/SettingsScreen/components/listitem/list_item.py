@@ -1,19 +1,27 @@
 from kivymd.uix.list import BaseListItem, IRightBodyTouch, OneLineRightIconListItem, TwoLineRightIconListItem
 from kivymd.uix.list import BaseListItem
-from kivy.properties import BooleanProperty
+from kivy.properties import BooleanProperty, StringProperty
 from kivymd.uix.selectioncontrol import MDSwitch
+from kivymd.uix.label import MDLabel
 
 
 class BaseListItemWithSwitch(BaseListItem):
     """base class for one line and two line items in the settings list"""
     active = BooleanProperty(False)
 
+class BaseListItemWithLabel(BaseListItem):
+    text = StringProperty("00:00")
 
 
 class RightSwitchContainer(IRightBodyTouch, MDSwitch):
     """The class implements a container for placing the switch on the right
     side of the settings screen
     """
+
+class RightLabelContainer(IRightBodyTouch, MDLabel):
+    """ This class implements a container for placing a label to the right
+    side of the settings screen """
+
 
 
 class OneLineListItemWithSwitch(OneLineRightIconListItem, BaseListItemWithSwitch):
@@ -22,3 +30,6 @@ class OneLineListItemWithSwitch(OneLineRightIconListItem, BaseListItemWithSwitch
 
 class TwoLineListItemWithSwitch(TwoLineRightIconListItem, BaseListItemWithSwitch):
     """The class implements a two line item of the settings list"""
+
+class TwoLineListItemWithLabel(TwoLineRightIconListItem, BaseListItemWithLabel):
+    """The class implements a two line item of the settings list with label"""

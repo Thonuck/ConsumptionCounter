@@ -1,5 +1,5 @@
 from View.base_screen import BaseScreenView
-from View.SettingsScreen.components import OneLineListItemWithSwitch, TwoLineListItemWithSwitch, Header
+from View.SettingsScreen.components import OneLineListItemWithSwitch, TwoLineListItemWithSwitch, Header, TwoLineListItemWithLabel
 
 
 class SettingsScreenView(BaseScreenView):
