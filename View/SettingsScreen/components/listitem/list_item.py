@@ -6,6 +6,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.pickers import MDTimePicker
+from datetime import datetime
 
 class BaseListItemWithSwitch(BaseListItem):
     """base class for one line and two line items in the settings list"""
@@ -15,7 +16,7 @@ class BaseListItemWithLabel(BaseListItem):
     text = StringProperty("00:00")
 
 class BaseListItemWithButton(BaseListItem):
-    text = StringProperty("00:00")
+    current_time = StringProperty("00:00")
 
 class RightSwitchContainer(IRightBodyTouch, MDSwitch):
     """The class implements a container for placing the switch on the right
@@ -35,32 +36,51 @@ class TimePicker(MDTimePicker):
 class RightButtonContainer(IRightBodyTouch, MDFlatButton):
     """ This class implements a container for placing a label to the right
     side of the settings screen """
-    time_dialog = ObjectProperty()
-    
-    def show_time_picker(self):
-        if not self.time_dialog:
-            self.time_dialog = MDDialog(
-                title='Select Time',
-                type='custom',
-                content_cls=TimePicker(),
-                buttons=[
-                    MDFlatButton(
-                        text='CANCEL', on_release=self.dismiss_dialog),
-                    MDFlatButton(
-                        text='OK', on_release=self.get_time)
-                ]
-            )
-        self.time_dialog.open()
 
-    def dismiss_dialog(self, *args):
-        self.time_dialog.dismiss()
+    def show_time_picker(self, *args):
+        '''Open time picker dialog.'''
+        time_dialog = TimePicker()
+        current_time = datetime.strptime(self.text, '%H:%M').time()
+        time_dialog.set_time(current_time)
+        time_dialog.bind(time=self.get_time, on_cancel=self.on_cancel, on_save=self.on_save)
+        time_dialog.open()
+    
+    def get_time(self, instance, time):
+        print("get_time. Time is {}".format(time))
+        return time
+
+    def on_cancel(self, instance, time):
+        print("On Cancel. Time is {}".format(time))
+
+    def on_save(self, instance, time):
+        self.text = time.strftime("%H:%M")
+        print("On Save. Time is {} - {} - {}".format(time, type(time), time.strftime("%H:%M")))
+    
+    
+    # def show_time_picker(self):
+    #     if not self.time_dialog:
+    #         self.time_dialog = MDDialog(
+    #             title='Select Time',
+    #             type='custom',
+    #             content_cls=TimePicker(),
+    #             buttons=[
+    #                 MDFlatButton(
+    #                     text='CANCEL', on_release=self.dismiss_dialog),
+    #                 MDFlatButton(
+    #                     text='OK', on_release=self.get_time)
+    #             ]
+    #         )
+    #     self.time_dialog.open()
+
+    # def dismiss_dialog(self, *args):
+    #     self.time_dialog.dismiss()
 
     def on_button_pressed(self):
         self.show_time_picker()
-    
-    def get_time(self, *args):
-        time_picker = self.time_dialog.content_cls
-        print(f'Time selected: {time_picker.time}')
+    # 
+    # def get_time(self, *args):
+    #     time_picker = self.time_dialog.content_cls
+    #     print(f'Time selected: {time_picker.time}')
 
 
 class OneLineListItemWithSwitch(OneLineRightIconListItem, BaseListItemWithSwitch):
