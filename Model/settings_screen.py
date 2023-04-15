@@ -12,3 +12,5 @@ class SettingsScreenModel(BaseScreenModel):
         # Just an example of the data. Use your own values.
         self._data = None
 
+    def write_notification_time(self, notification_time):
+        pass

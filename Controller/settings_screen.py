@@ -16,3 +16,9 @@ class SettingsScreenController:
 
     def get_view(self) -> SettingsScreenView:
         return self.view
+
+    def set_notification_time(self, current_time):
+        self.model.write_notification_time(current_time)
+
+    def get_notification_time(self):
+        return "12:34"
