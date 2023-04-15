@@ -41,14 +41,8 @@ class BaseTableScreen(BaseAppScreenView):
                                                  row_data=row_data))
         self.layout.add_widget(self.create_button_frame())
 
-        Window.bind(on_resize=lambda *args: self.update_rows_num())
-
         self.add_widget(self.layout)
 
-    def update_rows_num(self):
-        print("update rows num")
-        print("layout size:: {}".format(self.size))
-        
 
     def model_is_changed(self) -> None:
         """

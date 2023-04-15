@@ -19,6 +19,10 @@ from Model.water_input_screen import WaterInputScreenModel
 from Controller.water_input_screen import WaterInputScreenController
 from Model.settings_screen import SettingsScreenModel
 from Controller.settings_screen import SettingsScreenController
+from Model.warmth_input_screen import WarmthInputScreenModel
+from Controller.warmth_input_screen import WarmthInputScreenController
+from Model.warmth_overview_screen import WarmthOverviewScreenModel
+from Controller.warmth_overview_screen import WarmthOverviewScreenController
 
 screens = {
     "main screen": {
@@ -61,5 +65,13 @@ screens = {
     "settings screen": {
         "model": SettingsScreenModel,
         "controller": SettingsScreenController,
-    }
+    },
+    "warmth input screen": {
+        "model": WarmthInputScreenModel,
+        "controller": WarmthInputScreenController,
+    },
+    "warmth overview screen": {
+        "model": WarmthOverviewScreenModel,
+        "controller": WarmthOverviewScreenController,
+    },
 }
