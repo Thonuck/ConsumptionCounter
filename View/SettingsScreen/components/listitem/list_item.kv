@@ -25,10 +25,10 @@
 <BaseListItemWithButton>
     divisor: None
     on_size: self.ids._right_container.height = dp(64)
-    current_time: time_button.text
 
     RightButtonContainer:
         id: time_button
         on_release: self.on_button_pressed()
         size_hint: 1, 1
         text: root.current_time
+        on_text: root.set_time(self.text)

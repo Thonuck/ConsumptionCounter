@@ -1,5 +1,4 @@
 <SettingsScreenView>
-    
     MDBoxLayout:
         orientation: "vertical"
 
@@ -28,6 +27,7 @@
                 text: "Second Notification Time"
                 secondary_text: "Time per day to check data"
                 current_time: root.noty_time
+                on_current_time: root.set_current_time(self.current_time)
         MDWidget:
 
 

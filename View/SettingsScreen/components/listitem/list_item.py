@@ -7,6 +7,11 @@ from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.pickers import MDTimePicker
 from datetime import datetime
+import logging
+
+
+logger = logging.getLogger()
+
 
 class BaseListItemWithSwitch(BaseListItem):
     """base class for one line and two line items in the settings list"""
@@ -97,3 +102,8 @@ class TwoLineListItemWithLabel(TwoLineRightIconListItem, BaseListItemWithLabel):
 
 class TwoLineListItemWithButton(TwoLineRightIconListItem, BaseListItemWithButton):
     """The class implements a two line item of the settings list with label"""
+    current_time = StringProperty()
+    def set_time(self, time):
+        logger.info("setting time...")
+        self.current_time = time
+

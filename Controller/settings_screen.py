@@ -1,5 +1,8 @@
 
 from View.SettingsScreen.settings_screen import SettingsScreenView
+import logging
+
+logger = logging.getLogger()
 
 
 class SettingsScreenController:
@@ -18,7 +21,15 @@ class SettingsScreenController:
         return self.view
 
     def set_notification_time(self, current_time):
-        self.model.write_notification_time(current_time)
+        self.model.notification_time = current_time
 
     def get_notification_time(self):
-        return "12:34"
+
+        notification_time = self.model.notification_time
+        
+        logger.info("SettingsController: Get notification time: {}".format(notification_time))
+
+        if notification_time:
+            return notification_time
+        
+        return "12:00"

@@ -107,3 +107,23 @@ class DataBase():
         data = self.read_warmth()
         yield data
         self.write_warmth(data)
+
+    def read_settings_value(self, key):
+        data = self.read()
+        if 'settings' in data:
+            if key in data['settings']:
+                return data['settings'][key]
+
+    def write_settings_value(self, key, value):
+        data = self.read()
+        if 'settings' in data:
+            data['settings'][key] = value
+        else:
+            data['settings'] = {key: value}
+        self.write(data)
+
+            
+
+        
+        
+
