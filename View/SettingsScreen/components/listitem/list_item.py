@@ -61,31 +61,8 @@ class RightButtonContainer(IRightBodyTouch, MDFlatButton):
         self.text = time.strftime("%H:%M")
         print("On Save. Time is {} - {} - {}".format(time, type(time), time.strftime("%H:%M")))
     
-    
-    # def show_time_picker(self):
-    #     if not self.time_dialog:
-    #         self.time_dialog = MDDialog(
-    #             title='Select Time',
-    #             type='custom',
-    #             content_cls=TimePicker(),
-    #             buttons=[
-    #                 MDFlatButton(
-    #                     text='CANCEL', on_release=self.dismiss_dialog),
-    #                 MDFlatButton(
-    #                     text='OK', on_release=self.get_time)
-    #             ]
-    #         )
-    #     self.time_dialog.open()
-
-    # def dismiss_dialog(self, *args):
-    #     self.time_dialog.dismiss()
-
     def on_button_pressed(self):
         self.show_time_picker()
-    # 
-    # def get_time(self, *args):
-    #     time_picker = self.time_dialog.content_cls
-    #     print(f'Time selected: {time_picker.time}')
 
 
 class OneLineListItemWithSwitch(OneLineRightIconListItem, BaseListItemWithSwitch):
@@ -94,6 +71,7 @@ class OneLineListItemWithSwitch(OneLineRightIconListItem, BaseListItemWithSwitch
 
 class TwoLineListItemWithSwitch(TwoLineRightIconListItem, BaseListItemWithSwitch):
     """The class implements a two line item of the settings list"""
+    notification_enabled = BooleanProperty()
 
 
 class TwoLineListItemWithLabel(TwoLineRightIconListItem, BaseListItemWithLabel):
